@@ -1,1 +1,188 @@
-Hello World
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Your Name — Theoretical Physicist</title>
+  <meta name="description" content="Research homepage of Your Name: quantum field theory, scattering amplitudes, gravity, EFT, string theory." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg: #0b0c0f; /* near-black */
+      --fg: #e8eaed; /* light gray */
+      --muted: #a9b1bd;
+      --link: #8ab4f8;
+      --card: #14161a;
+      --accent: #6ee7b7; /* mint */
+      --rule: #22262c;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --radius: 16px;
+      --maxw: 900px;
+    }
+    *,*::before,*::after{box-sizing:border-box}
+    html,body{padding:0;margin:0}
+    body{
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      background: var(--bg);
+      color: var(--fg);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    a{color:var(--link); text-decoration:none}
+    a:hover{text-decoration:underline}
+    header{max-width:var(--maxw); margin: 64px auto 32px; padding:0 20px; display:grid; grid-template-columns: 140px 1fr; gap:24px; align-items:center}
+    .avatar{width:140px; height:140px; border-radius:50%; object-fit:cover; box-shadow: var(--shadow); background:#0f1115; border:1px solid #1e2228}
+    h1{font-weight:700; margin:0; font-size: clamp(28px, 4vw, 36px)}
+    .role{color:var(--muted); margin-top:4px}
+    .meta{margin-top:10px; font-size:15px; color:var(--muted)}
+    .meta div{margin:2px 0}
+    .chip{display:inline-block; padding:2px 8px; border-radius:999px; background:#101218; border:1px solid #1f2430; font-size:12.5px; color:#c9d1d9; margin-right:6px}
+    nav{max-width:var(--maxw); margin: 0 auto; padding:0 20px 8px}
+    nav ul{list-style:none; display:flex; gap:14px; padding:0; margin:0}
+    nav a{display:block; padding:8px 10px; border-radius:10px; border:1px solid transparent}
+    nav a:hover{border-color:#20242b; background:#111419}
+    .rule{height:1px; background:linear-gradient(90deg, transparent, var(--rule), transparent); border:0; margin:10px auto 34px; max-width:var(--maxw)}
+    main{max-width:var(--maxw); margin:0 auto 80px; padding:0 20px;}
+    section{margin:28px 0 36px}
+    h2{font-size: 20px; letter-spacing:.3px; font-weight:600; margin:0 0 10px}
+    h3{font-size: 16px; font-weight:600; margin:16px 0 6px}
+    p{margin:8px 0}
+    ul{padding-left:18px;}
+    li{margin:6px 0}
+    .card{background:var(--card); border:1px solid #1e232b; border-radius: var(--radius); padding:18px; box-shadow: var(--shadow)}
+    .grid{display:grid; grid-template-columns: 1fr; gap:14px}
+    @media (min-width: 860px){ .grid{grid-template-columns: 1fr 1fr}}
+    .subtle{color:var(--muted)}
+    .foot{margin-top:48px; font-size:14px; color:var(--muted)}
+    .contact a{word-break: break-all}
+    .pill{border:1px solid #233; display:inline-block; padding:4px 10px; border-radius:999px; font-size:13px; margin-right:6px}
+    .kbd{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; background:#10141a; border:1px solid #1e232b; padding:1px 6px; border-radius:6px}
+  </style>
+</head>
+<body>
+  <header>
+    <!-- Replace with your own image or remove the <img> tag -->
+    <img class="avatar" src="https://avatars.githubusercontent.com/u/583231" alt="Your portrait" />
+    <div>
+      <h1>Your Name</h1>
+      <div class="role">Theoretical Physicist</div>
+      <div class="meta">
+        <div>Institute / Department</div>
+        <div>Address line, City, Country</div>
+        <div>Office: 123 • Contact: <span class="kbd">your.name (at) institute.edu</span></div>
+        <div>
+          <span class="chip">QFT</span>
+          <span class="chip">Scattering Amplitudes</span>
+          <span class="chip">Gravity</span>
+          <span class="chip">EFT</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <nav>
+    <ul>
+      <li><a href="#research">Research</a></li>
+      <li><a href="#publications">Publications</a></li>
+      <li><a href="#teaching">Teaching</a></li>
+      <li><a href="#talks">Talks</a></li>
+      <li><a href="#cv">CV</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+  <hr class="rule" />
+
+  <main>
+    <section id="research">
+      <h2>Research</h2>
+      <p>
+        I work on quantum field theory, scattering amplitudes, gravitation, effective field theories and string theory.
+        Recently I've focused on importing collider techniques to classical GR problems relevant for gravitational-wave physics.
+      </p>
+    </section>
+
+    <section id="publications">
+      <h2>Recent publications</h2>
+      <p class="subtle">For a full list, see <a href="https://inspirehep.net/" target="_blank" rel="noreferrer">INSPIRE</a> or <a href="https://scholar.google.com" target="_blank" rel="noreferrer">Google Scholar</a>.</p>
+      <div class="grid">
+        <div class="card">
+          <h3>Paper Title One</h3>
+          <p><em>arXiv:2501.12345</em></p>
+          <p class="subtle">One‑line description of the result.</p>
+        </div>
+        <div class="card">
+          <h3>Paper Title Two</h3>
+          <p><em>arXiv:2411.23456</em></p>
+          <p class="subtle">One‑line description of the result.</p>
+        </div>
+        <div class="card">
+          <h3>Paper Title Three</h3>
+          <p><em>arXiv:2406.00001</em></p>
+          <p class="subtle">One‑line description of the result.</p>
+        </div>
+        <div class="card">
+          <h3>Paper Title Four</h3>
+          <p><em>arXiv:2401.99999</em></p>
+          <p class="subtle">One‑line description of the result.</p>
+        </div>
+      </div>
+      <p class="subtle" style="margin-top:10px">Tip: keep 6–10 highlights here; link out for the full list.</p>
+    </section>
+
+    <section id="teaching">
+      <h2>Teaching</h2>
+      <ul>
+        <li>Advanced QFT (Fall 2025) — University Name</li>
+        <li>Scattering Amplitudes (Spring 2025) — University Name</li>
+      </ul>
+    </section>
+
+    <section id="talks">
+      <h2>Selected talks</h2>
+      <ul>
+        <li>"Title of Talk" — Venue, Date. <a href="#">slides</a> · <a href="#">video</a></li>
+        <li>"Title of Talk" — Venue, Date. <a href="#">slides</a></li>
+      </ul>
+    </section>
+
+    <section id="cv">
+      <h2>CV</h2>
+      <p>
+        <a class="pill" href="./cv.pdf" target="_blank" rel="noreferrer">Download CV (PDF)</a>
+        <a class="pill" href="https://orcid.org/" target="_blank" rel="noreferrer">ORCID</a>
+      </p>
+      <div class="card">
+        <h3>Positions</h3>
+        <ul>
+          <li>2024–present — Position, Institute</li>
+          <li>2021–2024 — Previous Position, Institute</li>
+        </ul>
+        <h3>Education</h3>
+        <ul>
+          <li>PhD in Physics, University, Year</li>
+          <li>MASt in Applied Mathematics, University, Year</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="contact" class="contact">
+      <h2>Contact</h2>
+      <p>Office hours by appointment. Email: <span class="kbd">your.name (at) institute.edu</span></p>
+      <p>
+        <a href="https://github.com/" target="_blank" rel="noreferrer">GitHub</a> ·
+        <a href="https://scholar.google.com" target="_blank" rel="noreferrer">Scholar</a> ·
+        <a href="https://inspirehep.net/" target="_blank" rel="noreferrer">INSPIRE</a> ·
+        <a href="https://x.com" target="_blank" rel="noreferrer">X</a>
+      </p>
+      <p class="foot">© <span id="year"></span> Your Name</p>
+    </section>
+  </main>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
