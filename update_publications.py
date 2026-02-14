@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Fetch publications from INSPIRE-HEP and update index.html and minimal-cv/cv.tex."""
+"""Fetch publications from INSPIRE-HEP and update index.html and cv/cv.tex."""
 
 import json
 import os
@@ -16,7 +16,7 @@ API_URL = (
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 INDEX_HTML = os.path.join(SCRIPT_DIR, "index.html")
-CV_TEX = os.path.join(SCRIPT_DIR, "minimal-cv", "cv.tex")
+CV_TEX = os.path.join(SCRIPT_DIR, "cv", "cv.tex")
 
 MY_NAMES = {"Berean-Dutcher, Jonah", "Berean-Dutcher, J.", "Berean, Jonah", "Berean, J."}
 
@@ -205,7 +205,7 @@ def update_file(path, start_marker, end_marker, new_content):
 
 
 def compile_cv():
-    cv_dir = os.path.join(SCRIPT_DIR, "minimal-cv")
+    cv_dir = os.path.join(SCRIPT_DIR, "cv")
     for i in range(2):
         result = subprocess.run(
             ["pdflatex", "-interaction=nonstopmode", "cv.tex"],
