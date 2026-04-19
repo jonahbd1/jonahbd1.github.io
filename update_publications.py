@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Fetch publications from INSPIRE-HEP and update index.html and cv/cv.tex."""
+"""Fetch publications from INSPIRE-HEP and update website and Markdown CV files."""
 
 import json
 import os
@@ -16,7 +16,8 @@ API_URL = (
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 INDEX_HTML = os.path.join(SCRIPT_DIR, "index.html")
-CV_TEX = os.path.join(SCRIPT_DIR, "cv", "cv.tex")
+CV_MD = os.path.join(SCRIPT_DIR, "cv", "cv.md")
+PUBLICATION_LIST_MD = os.path.join(SCRIPT_DIR, "cv", "publication-list.md")
 
 MY_NAMES = {"Berean-Dutcher, Jonah", "Berean-Dutcher, J.", "Berean, Jonah", "Berean, J."}
 
@@ -32,7 +33,7 @@ def fetch_papers():
         doc_types = meta.get("document_type", [])
         if "thesis" in doc_types:
             continue
-        title = meta.get("titles", [{}])[0].get("title", "Untitled")
+        title = normalize_title(meta.get("titles", [{}])[0].get("title", "Untitled"))
         authors_raw = meta.get("authors", [])
         arxiv = meta.get("arxiv_eprints", [{}])[0].get("value") if meta.get("arxiv_eprints") else None
         pub_info = meta.get("publication_info", [{}])[0] if meta.get("publication_info") else {}
@@ -63,6 +64,13 @@ def format_author_short(full_name):
         initial = first[0] if first else ""
         return f"{initial}. {last.strip()}"
     return full_name
+
+
+def normalize_title(title):
+    """Clean up common spacing glitches in INSPIRE titles."""
+    title = re.sub(r"\s+", " ", title).strip()
+    title = re.sub(r"([A-Za-z0-9])(\$)", r"\1 \2", title)
+    return title
 
 
 def is_me(full_name):
@@ -107,31 +115,38 @@ def author_list_html(authors):
     return ", ".join(shown) + " et al."
 
 
-def author_list_latex(authors):
-    r"""Format coauthor list for LaTeX \with{...}, excluding me. Truncate to 2 coauthors."""
+def author_list_markdown(authors):
+    """Format author list for Markdown, bolding my name and truncating like the website."""
+    me_md = "**J. Berean-Dutcher**"
     coauthors = []
-    for a in authors:
+    me_idx = None
+    for i, a in enumerate(authors):
         fn = a.get("full_name", "")
         if is_me(fn):
-            continue
-        coauthors.append(format_author_short(fn).replace(" ", "~"))
-    if not coauthors:
-        return None
+            me_idx = i
+        else:
+            coauthors.append(format_author_short(fn))
     if len(coauthors) <= 2:
-        return " \\& ".join(coauthors)
-    return ", ".join(coauthors[:2]) + " et al."
+        names = []
+        for a in authors:
+            fn = a.get("full_name", "")
+            if is_me(fn):
+                names.append(me_md)
+            else:
+                names.append(format_author_short(fn))
+        if len(names) <= 2:
+            return " & ".join(names)
+        return ", ".join(names[:-1]) + " & " + names[-1]
+    shown = coauthors[:2]
+    if me_idx is not None:
+        shown.insert(min(me_idx, 2), me_md)
+    else:
+        shown.insert(0, me_md)
+    return ", ".join(shown) + " et al."
 
 
 def escape_html(s):
     return s.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
-
-
-def escape_latex(s):
-    # Don't escape $ — titles from INSPIRE use $...$ for math mode intentionally
-    special = {"&": r"\&", "%": r"\%", "#": r"\#", "_": r"\_", "~": r"\textasciitilde{}"}
-    for ch, repl in special.items():
-        s = s.replace(ch, repl)
-    return s
 
 
 def paper_link(paper):
@@ -161,28 +176,25 @@ def generate_html(papers):
     return "\n".join(lines)
 
 
-def generate_latex(papers):
-    lines = [r"\begin{itemize}"]
+def generate_markdown(papers):
+    lines = []
     for p in papers:
         url, _ = paper_link(p)
-        title_tex = escape_latex(p["title"])
-        coauthors = author_list_latex(p["authors"])
-        with_part = f" \\with{{{coauthors}}}" if coauthors else ""
-
-        if url:
-            item = f"\\item \\href{{{url}}}{{\\textcolor{{DodgerBlue4}}{{{title_tex}}}}}{with_part}"
-        else:
-            item = f"\\item {title_tex}{with_part}"
-
+        title = p["title"]
+        authors_md = author_list_markdown(p["authors"])
         journal = p.get("journal")
         year = p.get("year", "")
+        if url:
+            item = f"- [{title}]({url})"
+        else:
+            item = f"- {title}"
+        if authors_md:
+            item += f". {authors_md.rstrip('.')}"
         if journal:
-            item += f" \\sep \\textit{{{escape_latex(journal)}}} \\sep {year}"
+            item += f". *{journal}*, {year}"
         elif year:
-            item += f" \\sep Preprint \\sep {year}"
-
+            item += f". Preprint, {year}"
         lines.append(item)
-    lines.append(r"\end{itemize}")
     return "\n".join(lines)
 
 
@@ -204,21 +216,29 @@ def update_file(path, start_marker, end_marker, new_content):
     print(f"Updated {path}")
 
 
-def compile_cv():
-    cv_dir = os.path.join(SCRIPT_DIR, "cv")
-    for i in range(2):
-        result = subprocess.run(
-            ["pdflatex", "-interaction=nonstopmode", "cv.tex"],
-            cwd=cv_dir,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-        )
-        if result.returncode != 0:
-            print(f"pdflatex pass {i+1} warnings/errors (may be non-fatal):")
-            log_lines = result.stdout.decode("utf-8", errors="replace").strip().split("\n")
-            for line in log_lines[-20:]:
-                print(f"  {line}")
-    print("CV compiled.")
+def render_pdf(source_path):
+    output_path = os.path.splitext(source_path)[0] + ".pdf"
+    result = subprocess.run(
+        [
+            "pandoc",
+            source_path,
+            "--from=markdown+yaml_metadata_block+tex_math_dollars",
+            "--pdf-engine=xelatex",
+            "--standalone",
+            "--output",
+            output_path,
+        ],
+        cwd=SCRIPT_DIR,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+    )
+    if result.returncode != 0:
+        print(f"Pandoc failed while rendering {os.path.basename(source_path)}:")
+        log_text = (result.stderr or result.stdout).decode("utf-8", errors="replace").strip()
+        for line in log_text.splitlines()[-20:]:
+            print(f"  {line}")
+        raise SystemExit(result.returncode)
+    print(f"Rendered {output_path}")
 
 
 def main():
@@ -231,13 +251,15 @@ def main():
         return
 
     html_content = generate_html(papers)
-    latex_content = generate_latex(papers)
+    markdown_content = generate_markdown(papers)
 
     update_file(INDEX_HTML, "<!-- PUBLICATIONS-START -->", "<!-- PUBLICATIONS-END -->", html_content)
-    update_file(CV_TEX, "% PUBLICATIONS-START", "% PUBLICATIONS-END", latex_content)
+    update_file(CV_MD, "<!-- PUBLICATIONS-START -->", "<!-- PUBLICATIONS-END -->", markdown_content)
+    update_file(PUBLICATION_LIST_MD, "<!-- PUBLICATIONS-START -->", "<!-- PUBLICATIONS-END -->", markdown_content)
 
-    print("Compiling CV PDF...")
-    compile_cv()
+    print("Rendering PDFs...")
+    render_pdf(CV_MD)
+    render_pdf(PUBLICATION_LIST_MD)
     print("Done.")
 
 
