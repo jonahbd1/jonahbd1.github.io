@@ -1,11 +1,19 @@
-# website-and-cv
+# Public website
 
-Public GitHub Pages website sources.
+Public GitHub Pages website sources. This repository is a deployment target,
+not the authority for candidate facts, CV content, or publication metadata.
 
-CV sources live outside this public repo in the local folder `/Users/jbd/projects/cv`. Do not add CV source files or rendered CV PDFs back into this public repo. When a publication refresh should update both the CV folder and the website, run the updater from `/Users/jbd/projects/cv`.
+Do not add private profile files, CV sources, or rendered CV PDFs to this public
+repository. Publication updates are generated from the private applications
+repository with `python3 scripts/sync_profile.py`, which exports only allowlisted
+public data into the marked section of `index.html`.
 
-## Agent Runtime
+## Runtime
 
-For Python/runtime rules, follow `/Users/jbd/projects/executive/docs/agent-runtime-policy.md`: do not run bare `python`, `python3`, `pip`, or `pytest` for project work; use `./scripts/python` or repo-local CLI wrappers.
+The current website is static and requires no Python project runtime. Keep any
+future build instructions repository-local rather than referring to an absolute
+path on one machine.
 
-Use `./scripts/python update_publications.py` for a website-only publication update.
+Do not hand-edit generated content between `PUBLICATIONS-START` and
+`PUBLICATIONS-END`; change the renderer or source data in the private
+applications repository instead.

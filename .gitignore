@@ -6,3 +6,4 @@ vendor
 .venv/
 .uv-cache/
 __pycache__/
+.DS_Store

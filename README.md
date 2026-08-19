@@ -2,16 +2,18 @@
 
 Public GitHub Pages website.
 
-## Publications Workflow
+## Publications workflow
 
-The public publication section is generated from INSPIRE-HEP by:
+This repository is a public projection, not the authority for CV or
+publication data. The private applications repository owns the dated INSPIRE
+snapshots and publication renderer.
+
+From that repository, run:
 
 ```bash
-./scripts/python update_publications.py
+python3 scripts/sync_profile.py
 ```
 
-That script updates:
-
-- `index.html`
-
-CV sources live outside this public repo in the local folder `/Users/jbd/projects/cv`. Prefer running that folder's publication updater when both the CV and public website should be refreshed together.
+Its machine-local `config/local.toml` identifies this checkout. The sync updates
+only the marked publication section in `index.html`; it does not commit or push
+this repository. Use `--skip-website` for a private CV-only refresh.
