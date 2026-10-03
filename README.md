@@ -1,19 +1,18 @@
 # jonahbd1.github.io
 
-Public GitHub Pages website.
+Public GitHub Pages website. The homepage is plain HTML with `site.css` and
+`site.js`; it needs no local build or Python runtime. Pages publishes the root
+of `main`. Historical Jekyll starter pages are excluded by `_config.yml`.
 
 ## Publications workflow
 
-This repository is a public projection, not the authority for CV or
-publication data. The private applications repository owns the dated INSPIRE
-snapshots and publication renderer.
+The private applications repository owns reviewed publication selections,
+public summaries, status and dated INSPIRE metadata. Its supported
+`scripts/sync_profile.py` command renders the marked publication section of
+`index.html` in this Airy layout. Its ignored local integration configuration
+identifies this public checkout. The sync neither commits nor pushes.
 
-From that repository, run:
-
-```bash
-python3 scripts/sync_profile.py
-```
-
-Its machine-local `config/local.toml` identifies this checkout. The sync updates
-only the marked publication section in `index.html`; it does not commit or push
-this repository. Use `--skip-website` for a private CV-only refresh.
+Do not hand-edit between `PUBLICATIONS-START` and `PUBLICATIONS-END`. Keep private
+profile sources, provenance and CV PDFs outside this public repository. The
+weekly daily review proposes coordinated website/profile/CV changes before
+editing; publication requires a separate explicit request.

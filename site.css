@@ -1,0 +1,74 @@
+:root { color-scheme:light dark; background:light-dark(#fff,#171b1c); }
+html, body { margin:0; padding:0; }
+
+  #jonah-airy-numbered-page .jb-site { --jb-page:light-dark(#fff,#171b1c); --jb-ink:light-dark(#242b2d,#e4e9e9); --jb-soft:light-dark(#626d70,#a0afb2); --jb-line:light-dark(#e2e7e7,#354042); --jb-accent:light-dark(#45676c,#a6c8cd); --jb-gap:50px; background:var(--jb-page); color:var(--jb-ink); font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; font-size:15px; line-height:1.65; }
+  #jonah-airy-numbered-page .jb-site * { box-sizing:border-box; }
+  #jonah-airy-numbered-page .jb-site a { color:inherit; text-decoration:none; }
+  #jonah-airy-numbered-page .jb-site a:hover { color:var(--jb-accent); text-decoration:underline; text-underline-offset:4px; }
+  #jonah-airy-numbered-page .jb-site a:focus-visible, #jonah-airy-numbered-page .jb-site summary:focus-visible { outline:2px solid var(--jb-accent); outline-offset:5px; }
+  #jonah-airy-numbered-page .jb-topbar { padding:25px 36px; display:flex; align-items:center; justify-content:space-between; gap:20px; border-bottom:1px solid var(--jb-line); }
+  #jonah-airy-numbered-page .jb-brand { font-size:17px; font-weight:500; letter-spacing:-.35px; }
+  #jonah-airy-numbered-page nav { display:flex; flex-wrap:wrap; gap:22px; font-size:13px; color:var(--jb-soft); }
+  #jonah-airy-numbered-page .jb-main { padding:0 48px; width:100%; max-width:900px; margin:0 auto; }
+  #jonah-airy-numbered-page .jb-intro { padding:64px 0 0; }
+  #jonah-airy-numbered-page .jb-eyebrow { color:var(--jb-soft); font-weight:500; font-size:11px; letter-spacing:1.6px; line-height:1.7; text-transform:uppercase; margin:0 0 19px; }
+  #jonah-airy-numbered-page .jb-lead { font-size:24px; line-height:1.65; font-weight:400; letter-spacing:-.45px; margin:0; max-width:740px; }
+  #jonah-airy-numbered-page .jb-section { margin-top:var(--jb-gap); }
+  #jonah-airy-numbered-page .jb-section-head { display:flex; align-items:baseline; justify-content:space-between; gap:15px; }
+  #jonah-airy-numbered-page .jb-small-link { font-size:12px; color:var(--jb-accent)!important; }
+  #jonah-airy-numbered-page .jb-talk { border-bottom:1px solid var(--jb-line); }
+  #jonah-airy-numbered-page .jb-talk:first-child { border-top:1px solid var(--jb-line); }
+  #jonah-airy-numbered-page .jb-talk summary { display:grid; grid-template-columns:114px minmax(0,1fr) 20px; gap:18px; align-items:center; padding:17px 0; list-style:none; }
+  #jonah-airy-numbered-page summary::-webkit-details-marker { display:none; }
+  #jonah-airy-numbered-page .jb-talk time { font-size:12px; color:var(--jb-soft); font-variant-numeric:tabular-nums; }
+  #jonah-airy-numbered-page .jb-talk-name { font-size:17px; font-weight:500; line-height:1.5; }
+  #jonah-airy-numbered-page .jb-subline { display:block; color:var(--jb-soft); font-size:12px; font-weight:400; margin-top:2px; }
+  #jonah-airy-numbered-page .jb-expand { color:var(--jb-soft); font-size:18px; text-align:right; transition:transform .2s; }
+  #jonah-airy-numbered-page details[open] .jb-expand { transform:rotate(45deg); }
+  #jonah-airy-numbered-page .jb-talk-detail { padding:0 0 18px 132px; }
+  #jonah-airy-numbered-page .jb-talk-detail p { margin:0 0 5px; font-size:14px; }
+  #jonah-airy-numbered-page .jb-secondary { color:var(--jb-soft); }
+  #jonah-airy-numbered-page .jb-papers { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:40px; }
+  #jonah-airy-numbered-page .jb-paper-year { color:var(--jb-soft); font-size:11px; margin-bottom:7px; }
+  #jonah-airy-numbered-page .jb-paper h3 { font-size:19px; font-weight:500; line-height:1.45; letter-spacing:-.25px; margin:0 0 11px; }
+  #jonah-airy-numbered-page .jb-paper h3 span { font-size:14px; color:var(--jb-soft); white-space:nowrap; }
+  #jonah-airy-numbered-page .jb-paper p { margin:0 0 12px; font-size:14px; line-height:1.7; }
+  #jonah-airy-numbered-page .jb-paper .jb-authors { color:var(--jb-soft); font-size:11px; line-height:1.6; margin-bottom:6px; }
+  #jonah-airy-numbered-page .jb-archive { font-size:13px; margin-top:28px; }
+  #jonah-airy-numbered-page .jb-archive summary { color:var(--jb-soft); list-style:none; display:flex; justify-content:space-between; align-items:center; gap:15px; padding:14px 0; border-top:1px solid var(--jb-line); }
+  #jonah-airy-numbered-page .jb-archive ul { padding:0 0 0 18px; margin:14px 0; }
+  #jonah-airy-numbered-page .jb-archive li { margin:12px 0; }
+  #jonah-airy-numbered-page .jb-past { margin-top:12px; }
+  #jonah-airy-numbered-page .jb-past .jb-archive { margin-top:0; }
+  #jonah-airy-numbered-page .jb-footer { display:flex; justify-content:space-between; align-items:center; gap:20px; width:calc(100% - 96px); max-width:804px; padding:23px 0 32px; margin:40px auto 0; border-top:1px solid var(--jb-line); font-size:12px; }
+  #jonah-airy-numbered-page .jb-footer-links { display:flex; flex-wrap:wrap; gap:22px; color:var(--jb-soft); }
+  #jonah-airy-numbered-page [hidden] { display:none!important; }
+  #jonah-airy-numbered-page #pion-soft-on-page { margin-top:9px; }
+  @media(max-width:700px) {
+    #jonah-airy-numbered-page .jb-topbar { padding:22px 26px; gap:13px; flex-wrap:wrap; }
+    #jonah-airy-numbered-page .jb-brand { font-size:15px; }
+    #jonah-airy-numbered-page nav { gap:18px; font-size:12px; }
+    #jonah-airy-numbered-page .jb-main { padding:0 26px; }
+    #jonah-airy-numbered-page .jb-intro { padding-top:43px; }
+    #jonah-airy-numbered-page .jb-lead { font-size:21px; }
+    #jonah-airy-numbered-page .jb-eyebrow { letter-spacing:1.15px; }
+    #jonah-airy-numbered-page .jb-talk summary { grid-template-columns:85px minmax(0,1fr) 16px; gap:10px; }
+    #jonah-airy-numbered-page .jb-talk-name { font-size:15px; }
+    #jonah-airy-numbered-page .jb-talk-detail { padding-left:0; }
+    #jonah-airy-numbered-page .jb-papers { grid-template-columns:1fr; gap:26px; }
+    #jonah-airy-numbered-page .jb-footer { width:calc(100% - 52px); flex-wrap:wrap; }
+  }
+  @media(prefers-reduced-motion:reduce) { #jonah-airy-numbered-page .jb-expand { transition:none; } }
+
+
+  #pion-soft-on-page .op-component {
+    --op-ink: light-dark(#355d75, #9cc7df);
+    --op-number: light-dark(#4a5661, #c8d4dc);
+    --op-soft: light-dark(#d56a11, #ffb861);
+    min-height: 142px; padding: 4px 0;
+  }
+  #pion-soft-on-page .op-size { width: 460px; max-width: 100%; }
+  #pion-soft-on-page .op-diagram { display: block; width: 100%; overflow: visible; }
+  #pion-soft-on-page .op-number { fill: var(--op-number); font: 400 12px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+  #pion-soft-on-page .op-soft-number { fill: var(--op-soft); font-weight: 500; }
+  @media(max-width: 400px) { #pion-soft-on-page .op-component { min-height: 228px; } }
